@@ -38,18 +38,28 @@ public class BancoDeDados
      */
     public Integer bd_read(String key)
     {
-        leitura.lock();
-        Integer valor = df.get(key);
-        if(valor == null)
+        try
         {
-            System.out.println("Leu uma chave que nao existe");
+            controleMaxLeitores.acquire();
+            leitura.lock();
+            Integer valor = df.get(key);
+            if(valor == null)
+            {
+                System.out.println("Leu uma chave que nao existe");
+            }
+            else
+            {
+                System.out.println("Leu na chave" + key);
+            }
+            leitura.unlock();
+            controleMaxLeitores.release();
+            return valor;
         }
-        else
+        catch (InterruptedException ie)
         {
-            System.out.println("Leu na chave" + key);
+            ie.printStackTrace();
+            return null;
         }
-        leitura.unlock();
-        return valor;
     }
     
     /**
