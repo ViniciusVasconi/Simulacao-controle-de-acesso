@@ -1,0 +1,72 @@
+@startuml NovoDiagrama
+skinparam classAttributeIconSize 0
+skinparam style strictuml
+
+class Main {
+    +main(args: String[]): void
+}
+
+class BancoDeDados {
+    -df: Map<String, Integer>
+    -lock: ReentrantReadWriteLock
+    -leitura: Lock
+    -escrita: Lock
+    -controleMaxLeitores: Semaphore
+    +TamanhoMaximo: int
+    +bd_read(key: String): Integer
+    +bd_write(key: String, value: Integer): void
+    +bd_update(key: String, value: Integer): void
+    +bd_delete(key: String): void
+    +bd_print(): void
+    +getDfSize(): int
+}
+
+class Leitor {
+    -bd: BancoDeDados
+    -dadoLido: Integer
+    -chave: String
+    -startLatch: CountDownLatch
+    +call(): Integer
+    +getChave(): String
+    +gerarLeitores(n: int, bd: BancoDeDados, latch: CountDownLatch): List<Callable<Integer>>
+}
+
+class Escritor {
+    -bd: BancoDeDados
+    -valor: Integer
+    -chave: String
+    -startLatch: CountDownLatch
+    +run(): void
+    +gerarEscritores(bd: BancoDeDados, latch: CountDownLatch): List<Runnable>
+}
+
+class Deletor {
+    -bd: BancoDeDados
+    -chave: String
+    -startLatch: CountDownLatch
+    +run(): void
+    +gerarDeletores(n: int, bd: BancoDeDados, latch: CountDownLatch): List<Runnable>
+}
+
+class Editor {
+    -bd: BancoDeDados
+    -valor: Integer
+    -chave: String
+    -startLatch: CountDownLatch
+    +run(): void
+    +gerarEditores(n: int, bd: BancoDeDados, latch: CountDownLatch): List<Runnable>
+}
+
+Leitor --> BancoDeDados : usa
+Escritor --> BancoDeDados : usa
+Deletor --> BancoDeDados : usa
+Editor --> BancoDeDados : usa
+
+Main --> BancoDeDados : instancia
+Main --> Leitor : cria lista
+Main --> Escritor : cria lista
+Main --> Editor : cria lista
+Main --> Deletor : cria lista
+
+@enduml
+

@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=Escritor
+comment0.text=\n\ Essa\ classe\ representa\ um\ escritor.\n\n\ @author\ Vinicius\ Vasconi\n
+comment1.params=bd\ chave\ valor\ latch
+comment1.target=Escritor(BancoDeDados,\ java.lang.String,\ java.lang.Integer,\ java.util.concurrent.CountDownLatch)
+comment1.text=\n\ Constructor\ for\ objects\ of\ class\ Leitor\n
+comment2.params=
+comment2.target=void\ run()
+comment2.text=\n\ Implementa\ o\ metodo\ run\ de\ Runnable.\n
+comment3.params=bd\ latch
+comment3.target=java.util.List\ gerarEscritores(BancoDeDados,\ java.util.concurrent.CountDownLatch)
+comment3.text=\n\ Gerar\ escritores\ aleatorios\n
+numComments=4
