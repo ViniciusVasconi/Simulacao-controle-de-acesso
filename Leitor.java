@@ -12,7 +12,6 @@ import java.util.concurrent.CountDownLatch;
 public class Leitor implements Callable<Integer>
 {
     private BancoDeDados bd;
-    private Integer dadoLido;
     private String chave;
     private final CountDownLatch startLatch;
 
