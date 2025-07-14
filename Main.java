@@ -1,8 +1,6 @@
 import java.util.Scanner;
 import java.util.concurrent.*;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.Map;
 import java.util.HashMap;
 
@@ -104,5 +102,6 @@ public class Main {
             }
         }
         bd.bd_print();
+        scan.close();
     }
 }
